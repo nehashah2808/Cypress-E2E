@@ -7,28 +7,26 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import registerPage from "../pages/registerPage";
+import registerData from "../fixtures/registerData.json"
 
 // Common login functionality for all tests (Reusable function)
 Cypress.Commands.add('login', (email, password) => {
 
-    cy.visit('') // base url will be fetched from config file
-    cy.get('#input-email').type(email)
-    cy.get('#input-password').type(password)
-    cy.get('input.btn.btn-primary').click()
+    cy.visit('/login'); // base url will be fetched from config file
+    cy.get('#input-email').type(email);
+    cy.get('#input-password').type(password);
+    cy.get('input.btn.btn-primary').click();
+});
+
+Cypress.Commands.add('userRegistration', () => {
+    cy.visit('/register');
+    registerPage.enterFirstName(registerData.firstName)
+    registerPage.enterLastName(registerData.lastName)
+    registerPage.enterEmail(registerData.email)
+    registerPage.enterTelephone(registerData.telephone)
+    registerPage.enterPassword(registerData.password)
+    registerPage.selectCheckbox()
+    registerPage.clickOnContinue()
 })

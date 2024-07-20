@@ -6,7 +6,7 @@
 
 
 // marking it as export , so that it can be imported in tests folder under "DESCRIBE"
-export default class registerPage{
+class RegisterPage{
 
 
 
@@ -70,4 +70,7 @@ export default class registerPage{
 
 
 } //class registerPage
+
+module.exports = new RegisterPage();
+
 
